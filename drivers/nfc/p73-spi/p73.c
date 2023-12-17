@@ -42,6 +42,9 @@
 #include <linux/regulator/consumer.h>
 #include "p73.h"
 #include "../pn553-i2c/pn553.h"
+//#ifdef VENDOR_EDIT
+#include "../oplus_nfc/oplus_nfc.h"
+//#endif /* VENDOR_EDIT */
 
 extern long  pn544_dev_ioctl(struct file *filp, unsigned int cmd,
         unsigned long arg);
@@ -807,6 +810,12 @@ static int p61_probe(struct spi_device *spi)
     unsigned int irq_flags;
 #endif
 
+    //#ifdef OPLUS_FEATURE_NFC_CONSOFT
+    //Zhengzhou@CONNECTIVITY.NFC.BASIC,2674926, 2019/12/16,
+    //Add for : ST NXP chip common software
+    CHECK_NFC_CHIP(NQ330);
+    //#endif /* OPLUS_FEATURE_NFC_CONSOFT */
+
     P61_DBG_MSG("%s chip select : %d , bus number = %d \n",
             __FUNCTION__, spi->chip_select, spi->master->bus_num);
 #if !DRAGON_P61
@@ -924,8 +933,7 @@ static int p61_probe(struct spi_device *spi)
     p61_dev-> enable_poll_mode = 0; /* Default IRQ read mode */
     P61_DBG_MSG("Exit : %s\n", __FUNCTION__);
     return ret;
-    //#ifdef VENDOR_EDIT
-    //Weiwei.Deng@CN.NFC.Basic.Hardware, 2019/01/14,
+    //#ifndef VENDOR_EDIT
     //Modify for coverity:777213, not need code
     //err_exit1:
     //misc_deregister(&p61_dev->p61_device);
@@ -977,8 +985,7 @@ static int p61_remove(struct spi_device *spi)
         P61_ERR_MSG("ERROR %s p61_regulator not enabled \n", __FUNCTION__);
     }
 #endif
-    //#ifdef VENDOR_EDIT
-    //Weiwei.Deng@CN.NFC.Basic.Hardware, 2019/01/14,
+    //#ifndef VENDOR_EDIT
     //Mod for coverity:776436, to judge p61_dev before use
     //gpio_free(p61_dev->rst_gpio);
     //#else /* VENDOR_EDIT */
@@ -993,7 +1000,6 @@ static int p61_remove(struct spi_device *spi)
 #endif
 
     //#ifndef VENDOR_EDIT
-    //Weiwei.Deng@CN.NFC.Basic.Hardware, 2019/01/14,
     //Mod for coverity:784378, to judge p61_dev before use
     /*
     mutex_destroy(&p61_dev->read_mutex);
