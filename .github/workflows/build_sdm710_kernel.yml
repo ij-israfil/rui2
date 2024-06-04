@@ -37,8 +37,7 @@ jobs:
         git submodule sync
         git submodule update --init --recursive
         cd $GITHUB_WORKSPACE/KernelSU
-        git checkout main
-        git pull
+        git checkout v0.9.5
         export VERSION=$(git rev-list --count HEAD)
         echo "VER=$(($VERSION + 10200))" >> $GITHUB_OUTPUT
         cd -
