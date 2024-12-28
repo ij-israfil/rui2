@@ -36,8 +36,9 @@ jobs:
         rm -rf AnyKernel3/.github
         git submodule sync
         git submodule update --init --recursive
-        cd $GITHUB_WORKSPACE/KernelSU
-        git checkout v0.9.5
+        cd $GITHUB_WORKSPACE/KernelSU-Next
+        git checkout next
+        git pull
         export VERSION=$(git rev-list --count HEAD)
         echo "VER=$(($VERSION + 10200))" >> $GITHUB_OUTPUT
         cd -
@@ -59,7 +60,5 @@ jobs:
     - name: Upload Kernel
       uses: actions/upload-artifact@v4.3.0
       with:
-        name: RMX1901-BloodMoon-KernelSU-${{ steps.version.outputs.VER }}-${{ steps.get_time.outputs.TIME }}
+        name: RMX1901-KernelSU-Next-${{ steps.version.outputs.VER }}-${{ steps.get_time.outputs.TIME }}
         path: "AnyKernel3/*"
-
-   
