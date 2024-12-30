@@ -31,7 +31,7 @@ jobs:
         sudo apt install gcc-arm-linux-gnueabi -y
         sudo apt install binutils make python3 libssl-dev build-essential bc  bison flex zip unzip libssl-dev ca-certificates xz-utils mkbootimg cpio device-tree-compiler git git-lfs -y
         git clone --depth=1 https://github.com/kdrag0n/proton-clang.git clang
-        git clone https://github.com/ij-israfil/AnyKernel3 -b master --depth=1
+        git clone https://github.com/ij-israfil/AnyKernel3 -b ksu --depth=1
         rm -rf AnyKernel3/.git
         rm -rf AnyKernel3/.github
         git submodule sync
