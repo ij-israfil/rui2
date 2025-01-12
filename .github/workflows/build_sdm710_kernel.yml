@@ -26,7 +26,8 @@ jobs:
     - name: Install dependencies
       id: version
       run: |
-        sudo apt-get update -y 
+        sudo timedatectl set-timezone Asia/Dhaka
+        sudo apt-get update -y
         sudo apt install gcc-aarch64-linux-gnu -y
         sudo apt install gcc-arm-linux-gnueabi -y
         sudo apt install binutils make python3 libssl-dev build-essential bc  bison flex zip unzip libssl-dev ca-certificates xz-utils mkbootimg cpio device-tree-compiler git git-lfs -y
@@ -46,7 +47,7 @@ jobs:
     - name: GetTime
       id: get_time
       run: |
-        echo "TIME=$(TZ=UTC-8 date +%m%d%H%M )" >> $GITHUB_OUTPUT
+        echo "TIME=$(TZ=GMT+06 date +%m%d%H%M )" >> $GITHUB_OUTPUT
     
     - name: Build Kernel
       run: |
