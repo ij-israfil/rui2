@@ -14,14 +14,11 @@ jobs:
       KERNEL_DEFCONFIG: "sdm670-perf_defconfig"
       KERNEL_CMDLINE: "ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE_ARM32=arm-linux-gnueabi- O=out LLVM=1 LLVM_IAS=1"
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4.1.1
-      with:
-        submodules: 'true'
-        fetch-depth: 0
-
-    - name: Set up ccache
-      uses: hendrikmuhs/ccache-action@v1.2.12
+   - uses: actions/checkout@v4
+   - uses: actions/setup-python@v5
+     with:
+    python-version: '3.13' 
+    - run: python my_script.py
     
     - name: Install dependencies
       id: version
