@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     env:
       ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       TELEGRAM_TO: "${{ secrets.TELEGRAM_TO }}"
