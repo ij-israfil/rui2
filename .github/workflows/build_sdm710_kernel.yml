@@ -3,7 +3,7 @@ on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     env:
       TELEGRAM_TO: "${{ secrets.TELEGRAM_TO }}"
       TELEGRAM_TOKEN: "${{ secrets.TELEGRAM_TOKEN }}"
